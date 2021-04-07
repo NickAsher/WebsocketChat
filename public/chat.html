@@ -1,0 +1,37 @@
+<head>
+
+</head>
+<body>
+
+
+<script>
+
+    let myBrowserName = '' ;
+    if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
+      myBrowserName = 'Opera' ;
+    } else if(navigator.userAgent.indexOf("Chrome") != -1 ) {
+      myBrowserName = 'Chrome';
+    } else if(navigator.userAgent.indexOf("Safari") != -1) {
+      myBrowserName = 'Safari';
+    } else if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+      myBrowserName = 'Firefox';
+    } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )){ //IF IE > 10{
+      myBrowserName = 'IE' ;
+    } else {
+      myBrowserName = 'unknown';
+    }
+
+
+
+    let ws = new WebSocket('ws://localhost:4000') ;
+    console.log(ws) ;
+
+    ws.onmessage = (msg)=>{
+      console.log(msg.data) ;
+    } ;
+
+    ws.onopen = ()=>{
+      ws.send("Hi i am " + myBrowserName) ;
+    }
+</script>
+</body>
