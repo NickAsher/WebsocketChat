@@ -15,10 +15,16 @@ const wsServer = new websocket.Server({server}) ;
 wsServer.on('connection', (socket, req)=>{
 
 
-  socket.send("Server : Hey welcome here") ;
+  let welcomeMessage = JSON.stringify({senderName:'Server', chatMessage:'Hey! Welcome here'}) ;
+  socket.send('' + welcomeMessage) ;
 
   socket.on('message', (msg)=>{
-    console.log(msg) ;
+
+    wsServer.clients.forEach((client)=>{
+      if (client.readyState === websocket.OPEN) {
+        client.send('' + msg);
+      }
+    }) ;
   }) ;
 }) ;
 
