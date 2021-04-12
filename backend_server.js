@@ -4,8 +4,6 @@ const websocket = require('ws') ;
 const server = http.createServer((req, res)=>{
   console.log("this is the backend_server on port 4000") ;
   res.end("this is the backend_server on port 4000");
-
-
 }) ;
 
 const wsServer = new websocket.Server({server}) ;
